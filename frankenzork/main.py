@@ -1,5 +1,3 @@
-from logging import fatal, RootLogger
-
 
 class AnsiEscapes:
     class fg:
@@ -34,17 +32,15 @@ class AnsiEscapes:
 
     clear = "\033[0m"
 
-
 class Geneva:
     def __init__(self):
         self.been_before = False
         self.has_done_intro = False
-        self.scene = 1
 
     def main_room(self):
         print("We start off in Geneva, Switzerland, as Victor Frankenstein.")
-        print("You are currently in a massive mansions' . You spot 2 rooms. One leads to a hall, and another to a bedroom")
-        match input("Where would you like to do:").upper():
+        print("You are currently in a massive mansions' main room. You spot 2 rooms. One leads to a hall, and another to a bedroom")
+        match input("Where would you like to do: ").upper():
             case "BEDROOM":
                 self.bedroom()
             case "HALL":
@@ -53,6 +49,8 @@ class Geneva:
                 print("""Hall: Go to the hall
                         Bedroom: Go to the bedroom
                         Options/Print: Print options""")
+                self.main_room()
+            case _:
                 self.main_room()
 
     def bedroom(self):
@@ -77,16 +75,30 @@ class Geneva:
                         Hall: Go to the hall
                         Options/Print: Print options""")
                 self.bedroom()
+            case _:
+                self.bedroom()
 
     def hall(self):
         if self.has_done_intro:
             print(f"""Elizabeth: Welcome their, my dearest Victor. We shall be attending a {AnsiEscapes.fg.red}PARTY{AnsiEscapes.clear}
              located in the baths near Thonton. Would you like to {AnsiEscapes.fg.red}GO{AnsiEscapes.clear}?""")
             match input("What would you like to do:").upper():
+                case "OPTIONS" | "PRINT":
+                    print("""PARTY/GO: Go to the baths near Thonton
+                    Bedroom: Go to the bedroom
+                    Options/Print: Print options
+                    Back/Main: Go to the main room
+                    """)
+                    self.hall()
+                case "BACK" | "MAIN":
+                    self.main_room()
+                case "PARTY" | "GO":
+                    self.been_before = True
 
     def play(self):
         self.been_before = True
         self.main_room()
+
 
 class Game:
     def __init__(self):
@@ -120,7 +132,7 @@ class WelcomeScreen:
         \tbolts in his neck, which this couldn't be further from the truth: Mary Shelley, the author of the novel, 
         \tintended the character's detail to be sparse, and all she told use was that the figure was meant to have stitches
         \tall over his body, be humongous in size, and have a pale yellow skin. This is why the figure in this message
-        \tis yellow."""
+        \tis yellow.\n\n"""
 
         self.welcome_message = self.logo + self.message
 
@@ -146,6 +158,8 @@ class WelcomeScreen:
 def main():
     welcome_screen = WelcomeScreen()
     print(welcome_screen)
+    game = Game()
+    game.start()
 
 
 if __name__ == "__main__":
