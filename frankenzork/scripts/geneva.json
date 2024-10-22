@@ -5,7 +5,19 @@
         "We start off in Geneva, Switzerland, as Victor Frankenstein.",
         "You are currently in a massive mansions' main room. You spot 2 rooms. One leads to a hall, and another to a bedroom"
       ]
-
+    }
+  },
+  "bedroom": {
+    "init": {
+      "print":[
+        "You see a personal DIARY on your desk, which you immediately recognize as your own"
+      ]
+    },
+    "diary": {
+      "print": [
+        "Before I, Victor Frankenstein, shall begin my tale by retelling my misfortunes that have occurred due",
+        "to my fault, I shall start from the beginning. I had a blessed family and a childhood: 2 overly caring parents, "
+      ]
     }
   }
 }

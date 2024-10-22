@@ -147,7 +147,7 @@ class WelcomeScreen:
                             3) Print the welcome screen again""")
         match action:
             case '1':
-                print("Remember that you can always ask what you can do by entering in 'options' or 'print' All the options highlighted in a unique color are valid unique options")
+                print("Remember that you can always ask what you can do by entering in 'options' or 'print'. All the options bolded valid options.")
                 game_instance.start()
             case '3':
                 self.run(game_instance)
