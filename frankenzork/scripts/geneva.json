@@ -15,9 +15,19 @@
     },
     "diary": {
       "print": [
+        "PAGE 1 OF DIARY",
         "Before I, Victor Frankenstein, shall begin my tale by retelling my misfortunes that have occurred due",
-        "to my fault, I shall start from the beginning. I had a blessed family and a childhood: 2 overly caring parents, "
+        "to my fault, I shall start from the beginning. I had a blessed family and a childhood: 2 overly caring parents, ",
+        "my more-than-sister, Elizabeth, and my dear siblings William and Ernest. We start in Geneva, where me and all my ",
+        "siblings were born in. Elizabeth was an angel and heart and the pride of me and my family. We were barely my age, ",
+        "and I adored her to death. Among my dearest companions was also Henry Clerval, the son of a merchant. He was ",
+        "one of my most loyal friends, during childhood and even into adulthood.",
+        "END OF DIARY"
       ]
-    }
+    },
+    "hall": {
+      "print": [
+          
+      ]
   }
 }
