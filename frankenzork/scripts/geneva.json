@@ -1,0 +1,11 @@
+{
+  "main": {
+    "init": {
+      "print": [
+        "We start off in Geneva, Switzerland, as Victor Frankenstein.",
+        "You are currently in a massive mansions' main room. You spot 2 rooms. One leads to a hall, and another to a bedroom"
+      ]
+
+    }
+  }
+}
