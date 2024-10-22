@@ -1,3 +1,5 @@
+import json
+
 
 class AnsiEscapes:
     class fg:
@@ -36,52 +38,45 @@ class Geneva:
     def __init__(self):
         self.been_before = False
         self.has_done_intro = False
+        with open('scripts/geneva.json', 'r') as f:
+            self.script = json.load(f)
 
     def main_room(self):
-        print("We start off in Geneva, Switzerland, as Victor Frankenstein.")
-        print("You are currently in a massive mansions' main room. You spot 2 rooms. One leads to a hall, and another to a bedroom")
+        for string in self.script['main']['init']['print']:
+            print(string)
         match input("Where would you like to do: ").upper():
             case "BEDROOM":
                 self.bedroom()
             case "HALL":
                 self.hall()
             case "OPTIONS" | "PRINT":
-                print("""Hall: Go to the hall
-                        Bedroom: Go to the bedroom
-                        Options/Print: Print options""")
+                print("""Hall: Go to the hall\nBedroom: Go to the bedroom\nOptions/Print: Print options""")
                 self.main_room()
             case _:
                 self.main_room()
 
     def bedroom(self):
-        print(f"You see a personal {AnsiEscapes.fg.red}DIARY{AnsiEscapes.clear} on your desk, which you immediately recognize as your own")
+        for string in self.script['bedroom']['init']['print']:
+            print(string)
         match input("What would you like to do:").upper():
             case "READ" | "DIARY":
                 self.has_done_intro = True
-                print("""Before I, Victor Frankenstein, shall begin my tale by retelling my misfortunes that have occurred due 
-                to my fault, I shall start from the beginning. I had a blessed family and a childhood: 2 overly caring parents, 
-                my more-than-sister, Elizabeth, and my dear siblings William and Ernest. We start in Geneva, where me and all my 
-                siblings were born in. Elizabeth was an angel and heart and the pride of me and my family. We were barely my age, 
-                and I adored her to death. Among my dearest companions was also Henry Clerval, the son of a merchant. He was 
-                one of my most loyal friends, during childhood and even into adulthood.
-                END OF DIARY""")
+                for string in self.script['bedroom']['diary']['print']:
+                    print(string)
             case "HALL":
                 self.hall()
             case "BACK" | "MAIN":
                 self.main_room()
             case "OPTIONS" | "PRINT":
-                print("""Read/Diary: Read the diary
-                        Main room: Go to the main room
-                        Hall: Go to the hall
-                        Options/Print: Print options""")
+                print("Read/Diary: Read the diary\nMain room: Go to the main room\nHall: Go to the hall\nOptions/Print: Print options")
                 self.bedroom()
             case _:
                 self.bedroom()
 
     def hall(self):
         if self.has_done_intro:
-            print(f"""Elizabeth: Welcome their, my dearest Victor. We shall be attending a {AnsiEscapes.fg.red}PARTY{AnsiEscapes.clear}
-             located in the baths near Thonton. Would you like to {AnsiEscapes.fg.red}GO{AnsiEscapes.clear}?""")
+            for string in self.script['hall']['print']:
+                print(string)
             match input("What would you like to do:").upper():
                 case "OPTIONS" | "PRINT":
                     print("""PARTY/GO: Go to the baths near Thonton
@@ -92,8 +87,27 @@ class Geneva:
                     self.hall()
                 case "BACK" | "MAIN":
                     self.main_room()
+                case "BEDROOM":
+                    self.bedroom()
                 case "PARTY" | "GO":
                     self.been_before = True
+                case _:
+                    self.hall()
+        else:
+            print(self.script['hall']['default'])
+            match input("What would you like to do:").upper():
+                case "OPTIONS" | "PRINT":
+                    print("""Bedroom: Go to the bedroom
+                    Options/Print: Print options
+                    Back/Main: Go to the main room
+                    """)
+                    self.hall()
+                case "BACK" | "MAIN":
+                    self.main_room()
+                case "BEDROOM":
+                    self.bedroom()
+                case _:
+                    self.hall()
 
     def play(self):
         self.been_before = True
@@ -103,10 +117,11 @@ class Geneva:
 class Game:
     def __init__(self):
         geneva = Geneva()
-        self.room: Geneva = geneva
+        self.rooms = (geneva,)
 
     def start(self):
-        self.room.play()
+        for room in self.rooms:
+            room.play()
 
 
 class WelcomeScreen:

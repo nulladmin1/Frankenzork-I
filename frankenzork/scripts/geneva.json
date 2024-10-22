@@ -27,7 +27,10 @@
     },
     "hall": {
       "print": [
-          
-      ]
+        "Elizabeth: Welcome their, my dearest Victor. We shall be attending a PARTY",
+        "located in the baths near Thonton. Would you like to GO?"
+      ],
+      "default": "No one seems to be here right now. Maybe everyone else is checking out nulladmin1's GitHub"
+    }
   }
 }
