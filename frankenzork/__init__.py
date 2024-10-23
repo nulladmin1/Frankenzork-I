@@ -1,3 +1,4 @@
-from app.main import main, get_sha256
+from frankenzork.geneva import Geneva
+from frankenzork.main import WelcomeScreen, main
 
 __version__ = "0.1.0"
